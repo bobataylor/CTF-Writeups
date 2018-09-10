@@ -1,11 +1,10 @@
 # Web Book
 A 75 point problem from <a href="https://www.hackerrank.com/codefest-ctf-18">Codefest CTF 2018</a>
 
-```
-It is expected to complete reading a book/novel to pass the course, but the students being clever avoid reading the whole book by going through the summary only. 
+
+"It is expected to complete reading a book/novel to pass the course, but the students being clever avoid reading the whole book by going through the summary only. 
 Santosh(their course teacher) comes up with a new idea, he creates a magic book (you can only go to next page, that is: you can't go to next page without reading the previous one and so on, and you can only start from the beginning). 
-It is know that the flag is hidden somewhere in the book, so the only way to pass the course is to read the whole book, find the flag. The book has 1000 pages so better be fast. And if you are lucky, you may even find the key on the very first page itself.
-```
+It is know that the flag is hidden somewhere in the book, so the only way to pass the course is to read the whole book, find the flag. The book has 1000 pages so better be fast. And if you are lucky, you may even find the key on the very first page itself."
 
 The problem statement above then links the player to <a href="http://34.216.132.109:8083/fp/">http://34.216.132.109:8083/fp/</a>
 
