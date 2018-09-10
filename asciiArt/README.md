@@ -1,4 +1,4 @@
-#ASCII Art
+# ASCII Art
 A 6 point coding challenge from https://ringzer0team.com/challenges/119
 
 Once a player logs in and load the page they are greeted with the following message and a seriers of ASCII art numbers of the following form.
