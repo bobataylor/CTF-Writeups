@@ -8,7 +8,7 @@ Trying to open this file will result in Windows not knowing what program to use 
 
 I proceeded by opening the file in a hex editor (010) and looking at the magic bytes / header.
 
-<img src="010.png">
+<img src="010.PNG">
 
 In the header the following lines stood out and made me think the file might be a PDF.
 ```RGB... XYZ... Copyright 1999 Adobe Systems Incorporated... desc... Adobe RGB (1998)```
@@ -19,4 +19,4 @@ I tried looking up the old magic bytes on <a href="https://en.wikipedia.org/wiki
 
 Changing the magic bytes to these values and the file extension to .jpeg produced this beautiful picture of the flag.
 
-<img src="filename.jpg">
+<img src="filename.jpeg">
