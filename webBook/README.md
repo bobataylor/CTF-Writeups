@@ -11,7 +11,7 @@ The problem statement above then links the player to <a href="http://34.216.132.
 This problem was nothing more than a scripting exercise, but it was new to me in that I had to find a way to actually click the ```Next``` button. Simply going to the page the button pointed to would result in a ```Not authorized``` message.
 
 In order to click the button I used Selenium to find the button element, click it, read the text off the page, check for a flag, then continue.
-```
+``` python
 from selenium import webdriver
 
 web_base = "http://34.216.132.109:8083"
