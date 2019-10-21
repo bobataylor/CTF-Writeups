@@ -1,7 +1,7 @@
 # Your degree doesn't prepare you for this....prove your worth.
 A 125 point problem from the 2019 <a href="https://osucyber.club">CyberSecurity Club @ Ohio State</a> CTF
 
-![Problem](problem.png)
+![Problem](/problem.png)
 
 After taking the better part of 4 hours to solve this problem I can assure you that you will be far more sorry than your professors.
 
