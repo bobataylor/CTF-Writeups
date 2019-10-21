@@ -1,7 +1,7 @@
 # Your degree doesn't prepare you for this....prove your worth.
 A 125 point problem from the 2019 <a href="https://osucyber.club">CyberSecurity Club @ Ohio State</a> CTF
 
-![Problem](https://github.com/bobataylor/CTF-Writeups/blob/master/Ook/problem.png)
+![Problem](problem.PNG)
 
 After taking the better part of 4 hours to solve this problem I can assure you that you will be far more sorry than your professors.
 
@@ -22,10 +22,10 @@ If you didn't already know that, you might also not know what an esoteric progra
 Getting into it a little more, Ook isn't just any eso-lang, it's a Brainfuck substitution. Brainfuck is one of the most famous eso-langs and is built on the idea of a continuous array of memory and a pointer to the current cell. That pointer and can be moved to other cells, then the data in that cell incremented, decremented, or printed to the console.
 Brainfuck | Meaning
 ----------|--------
-> | Move the pointer to the right
+\> | Move the pointer to the right
 < | Move the pointer to the left
-+ | Increment the memory cell under the pointer
-- | Decrement the memory cell under the pointer
+\+ | Increment the memory cell under the pointer
+\- | Decrement the memory cell under the pointer
 . | Output the character signified by the cell at the pointer
 , | Input a character and store it in the cell at the pointer
 [ | Jump past the matching ] if the cell under the pointer is 0
@@ -35,10 +35,10 @@ Brainfuck | Meaning
 So a Brainfuck substitution just maps those 8 symbols to 8 other symbols, and for Ook! it works like this:
 Brainfuck | Ook!
 ----------|--------
-> | Ook. Ook?
+\> | Ook. Ook?
 < | Ook? Ook.
-+ | Ook. Ook.
-- | Ook! Ook!
+\+ | Ook. Ook.
+\- | Ook! Ook!
 . | Ook! Ook.
 , | Ook. Ook!
 [ | Ook! Ook?
@@ -46,7 +46,7 @@ Brainfuck | Ook!
 
 So now that we know what Ook! is we can start looking for how to run it. Thankfully, it's popular enough to have lots of online interpreters out there, the best one I could find is from <a href="https://www.geocachingtoolbox.com/index.php?lang=en&page=brainfuckOok">Geocaching Toolbox.com</a> When we run our code here the output is just a bunch of 1's and 0's, not a flag, but not a dead end either.
 
-![GCT Ook1](https://github.com/bobataylor/CTF-Writeups/blob/master/Ook/GCT_ook_1.png)
+![GCT Ook1](GCT_ook_1.PNG)
 
 After many hours of starting at this binary and trying just about everything I could think of for encoding schemes I still didn't know what this data was and was beginning to think that I was missing something. I converted it to hex, a raw binary, 7-bit ASCII, 8-bit ASCII, 9-bit ASCII, still nothing. Then somewhere along the way I realized that the length of the output is 15447 characters.
 
@@ -56,8 +56,8 @@ Brainfuck | Binary | Base 10
 ----------|--------|--------
 \> | 000 | 0
 < | 001 | 1
-+ | 010 | 2
-- | 011 | 3
+\+ | 010 | 2
+\- | 011 | 3
 . | 100 | 4
 , | 101 | 5
 [ | 110 | 6
@@ -65,19 +65,19 @@ Brainfuck | Binary | Base 10
 
 If we apply this encoding to our Ook output and represent the symbols in base 10 for the sake of readability it look like this 
 ```
-0 0 0 0 0 0 0 0 0 0 6 2 0 2 0 0 0 2 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 3 3 3 3 1 7 2 2 0 0 0 0 0 0 0 0 0 0 0 0 0 4 2 2 
-1 1 1 1 1 1 1 1 1 4 3 3 0 0 4 4 4 4 4 2 1 1 1 1 1 1 1 1 4 3 1 1 4 4 4 2 1 1 4 2 0 0 4 3 0 0 4 3 4 0 0 0 4 1 4 4 4 0 4 2 
-2 1 1 4 3 3 1 4 4 4 2 4 3 1 1 4 2 1 1 4 2 0 0 4 3 0 0 4 3 4 4 0 0 0 4 1 4 2 2 1 1 4 3 3 4 4 4 4 2 4 3 1 1 4 2 1 1 4 2 0 
-0 4 3 0 0 4 3 4 4 0 0 0 4 1 1 1 4 4 2 2 1 1 4 3 3 0 0 4 4 4 2 4 3 1 1 4 4 2 1 1 4 2 0 0 4 3 0 0 4 3 0 0 0 4 1 1 1 4 4 4 
-0 0 0 4 4 1 4 4 4 4 0 4 1 4 2 2 1 1 4 3 3 1 1 4 4 2 4 3 0 0 4 4 4 2 1 1 4 2 0 0 4 3 0 0 4 3 1 1 4 0 0 0 4 2 2 1 1 4 3 3 
-1 4 2 4 3 1 1 4 4 4 2 1 1 4 2 0 0 4 3 0 0 4 3 4 0 0 0 4 1 4 4 2 2 1 1 4 3 3 4 4 4 2 4 3 1 1 4 2 1 1 4 2 0 0 4 3 0 0 4 3 
-0 0 4 0 4 2 2 1 1 4 3 3 1 4 4 4 4 2 4 3 1 1 4 2 1 1 4 2 0 0 4 3 0 0 4 3 4 4 4 0 0 0 4 1 4 4 2 2 1 1 4 3 3 4 2 4 3 1 1 4 
-4 4 4 2 1 1 4 2 0 0 4 3 0 0 4 3 4 0 0 0 4 1 4 4 4 4 4 4 4 4 4 4 0 4 1 1 1 4 4 4 4 4 4 0 0 0 4 1 4 2 2 1 1 4 3 3 4 4 2 4 
-3 1 1 4 4 4 4 4 2 1 1 4 2 0 0 4 3 0 0 4 3 0 0 4 0 4 1 1 1 4 4 4 4 4 4 4 4 4 4 4 4 4 0 0 0 4 4 4 1 4 4 4 2 2 1 1 4 3 3 4 
-4 4 4 4 2 4 3 1 1 4 2 1 1 4 2 0 0 4 3 0 0 4 3 0 0 0 4 1 1 1 4 4 4 4 4 4 0 0 0 4 1 4 4 4 0 4 2 2 1 1 4 3 3 1 4 4 2 4 3 1 
-1 4 4 4 4 4 2 1 1 4 2 0 0 4 3 0 0 4 3 4 4 4 0 0 0 4 1 1 1 4 4 2 2 1 1 4 3 3 0 0 4 2 4 3 1 1 4 4 4 2 1 1 4 2 0 0 4 3 0 0 
-4 3 0 0 0 4 1 4 4 4 4 4 0 4 1 1 1 4 4 4 4 4 4 4 4 0 0 0 4 1 1 1 4 4 4 4 4 4 4 4 4 4 4 0 0 0 4 1 4 4 4 4 4 4 4 4 4 4 4 4 
-0 4 1 4 4 2 2 1 1 4 3 3 4 4 4 2 4 3 1 1 4 2 1 1 4 2 0 0 4 3 0 0 4 3 0 0 4 4 0 4 1 4 2 2 1 1 4 3 3 4 4 4 2 4 3 1 1 4 4 2 
+0 0 0 0 0 0 0 0 0 0 6 2 0 2 0 0 0 2 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 3 3 3 3 1 7 2 2 0 0 0 0 0 0 0 0 0 0 0 0 0 
+4 2 2 1 1 1 1 1 1 1 1 1 4 3 3 0 0 4 4 4 4 4 2 1 1 1 1 1 1 1 1 4 3 1 1 4 4 4 2 1 1 4 2 0 0 4 3 0 0 4 3 4 0 0 0 4 1 
+4 4 4 0 4 2 2 1 1 4 3 3 1 4 4 4 2 4 3 1 1 4 2 1 1 4 2 0 0 4 3 0 0 4 3 4 4 0 0 0 4 1 4 2 2 1 1 4 3 3 4 4 4 4 2 4 3 
+1 1 4 2 1 1 4 2 0 0 4 3 0 0 4 3 4 4 0 0 0 4 1 1 1 4 4 2 2 1 1 4 3 3 0 0 4 4 4 2 4 3 1 1 4 4 2 1 1 4 2 0 0 4 3 0 0 
+4 3 0 0 0 4 1 1 1 4 4 4 0 0 0 4 4 1 4 4 4 4 0 4 1 4 2 2 1 1 4 3 3 1 1 4 4 2 4 3 0 0 4 4 4 2 1 1 4 2 0 0 4 3 0 0 4 
+3 1 1 4 0 0 0 4 2 2 1 1 4 3 3 1 4 2 4 3 1 1 4 4 4 2 1 1 4 2 0 0 4 3 0 0 4 3 4 0 0 0 4 1 4 4 2 2 1 1 4 3 3 4 4 4 2 
+4 3 1 1 4 2 1 1 4 2 0 0 4 3 0 0 4 3 0 0 4 0 4 2 2 1 1 4 3 3 1 4 4 4 4 2 4 3 1 1 4 2 1 1 4 2 0 0 4 3 0 0 4 3 4 4 4 
+0 0 0 4 1 4 4 2 2 1 1 4 3 3 4 2 4 3 1 1 4 4 4 4 2 1 1 4 2 0 0 4 3 0 0 4 3 4 0 0 0 4 1 4 4 4 4 4 4 4 4 4 4 0 4 1 1 
+1 4 4 4 4 4 4 0 0 0 4 1 4 2 2 1 1 4 3 3 4 4 2 4 3 1 1 4 4 4 4 4 2 1 1 4 2 0 0 4 3 0 0 4 3 0 0 4 0 4 1 1 1 4 4 4 4 
+4 4 4 4 4 4 4 4 4 0 0 0 4 4 4 1 4 4 4 2 2 1 1 4 3 3 4 4 4 4 4 2 4 3 1 1 4 2 1 1 4 2 0 0 4 3 0 0 4 3 0 0 0 4 1 1 1 
+4 4 4 4 4 4 0 0 0 4 1 4 4 4 0 4 2 2 1 1 4 3 3 1 4 4 2 4 3 1 1 4 4 4 4 4 2 1 1 4 2 0 0 4 3 0 0 4 3 4 4 4 0 0 0 4 1 
+1 1 4 4 2 2 1 1 4 3 3 0 0 4 2 4 3 1 1 4 4 4 2 1 1 4 2 0 0 4 3 0 0 4 3 0 0 0 4 1 4 4 4 4 4 0 4 1 1 1 4 4 4 4 4 4 4 
+4 0 0 0 4 1 1 1 4 4 4 4 4 4 4 4 4 4 4 0 0 0 4 1 4 4 4 4 4 4 4 4 4 4 4 4 0 4 1 4 4 2 2 1 1 4 3 3 4 4 4 2 4 3 1 1 4 
 
 ...
 ```
@@ -110,8 +110,8 @@ Brainfuck | Binary | Base 10
 ----------|--------|--------
 \> | 010 | 2
 < | 011 | 3
-+ | 000 | 0
-- | 001 | 1
+\+ | 000 | 0
+\- | 001 | 1
 . | 100 | 4
 , | 101 | 5
 [ | 110 | 6
@@ -119,17 +119,17 @@ Brainfuck | Binary | Base 10
 
 This new encoding gives us the following
 ```brainfuck
-++++++++++[>+>+++>+++++++>++++++++++<<<<-]>>+++++++++++++.>>---------.<<++.....>--------.<--...>--.>++.<++.<.+++.-...+.>>
---.<<-...>.<--.>--.>++.<++.<..+++.-.>>--.<<....>.<--.>--.>++.<++.<..+++.---..>>--.<<++...>.<--..>--.>++.<++.<+++.---...++
-+..-....+.-.>>--.<<--..>.<++...>--.>++.<++.<--.+++.>>--.<<-.>.<--...>--.>++.<++.<.+++.-..>>--.<<...>.<--.>--.>++.<++.<++.
-+.>>--.<<-....>.<--.>--.>++.<++.<...+++.-..>>--.<<.>.<--....>--.>++.<++.<.+++.-..........+.---......+++.-.>>--.<<..>.<--.
-....>--.>++.<++.<++.+.---.............+++...-...>>--.<<.....>.<--.>--.>++.<++.<+++.---......+++.-...+.>>--.<<-..>.<--....
-.>--.>++.<++.<...+++.---..>>--.<<++.>.<--...>--.>++.<++.<+++.-.....+.---........+++.---...........+++.-............+.-..>
->--.<<...>.<--.>--.>++.<++.<++..+.-.>>--.<<...>.<--..>--.>++.<++.<++.+.---.....+++.-.>>--.<<.>.<--.....>--.>++.<++.<++.+.
--..>>--.<<.>.<--....>--.>++.<++.<.+++.-..........+.---......+++.-...+.>>--.<<-..>.<--.....>--.>++.<++.<...+++.>>--.<<-.>.
-<--...>--.>++.<++.<.+++.---.+++.---.......+++.---...+++.-...+.---...........+++.-...........+.-....+.>>--.<<-...>.<--.>--
-.>++.<++.<++....+.---.>>--.<<++....>.<--.>--.>++.<++.<...+++.-.>>--.<<...>.<--..>--.>++.<++.<++..+.-.......+.-..>>--.<<..
-.>.<--.>--.>++.<++.<++..+.---.>>--.<<++....>.<--.>--.>++.<++.<...+++.-...>>--.<<.>.<--....>--.>++.<++.<++.+.-.......+.-..
+++++++++++[>+>+++>+++++++>++++++++++<<<<-]>>+++++++++++++.>>---------.<<++.....>--------.<--...>--.>++.<++.<.+++.-...
++.>>--.<<-...>.<--.>--.>++.<++.<..+++.-.>>--.<<....>.<--.>--.>++.<++.<..+++.---..>>--.<<++...>.<--..>--.>++.<++.<+++.
+---...+++..-....+.-.>>--.<<--..>.<++...>--.>++.<++.<--.+++.>>--.<<-.>.<--...>--.>++.<++.<.+++.-..>>--.<<...>.<--.>--.
+>++.<++.<++.+.>>--.<<-....>.<--.>--.>++.<++.<...+++.-..>>--.<<.>.<--....>--.>++.<++.<.+++.-..........+.---......++.-.
+>>--.<<..>.<--.....>--.>++.<++.<++.+.---.............+++...-...>>--.<<.....>.<--.>--.>++.<++.<+++.---......+++.-...+.
+>>--.<<-..>.<--.....>--.>++.<++.<...+++.---..>>--.<<++.>.<--...>--.>++.<++.<+++.-.....+.---........+++.---...........
++++.-............+.-..>>--.<<...>.<--.>--.>++.<++.<++..+.-.>>--.<<...>.<--..>--.>++.<++.<++.+.---.....+++.-.>>--.<<.>
+.<--.....>--.>++.<++.<++.+.-..>>--.<<.>.<--....>--.>++.<++.<.+++.-..........+.---......+++.-...+.>>--.<<-..>.<--.....
+>--.>++.<++.<...+++.>>--.<<-.>.<--...>--.>++.<++.<.+++.---.+++.---.......+++.---...+++.-...+.---...........+++.-.....
+......+.-....+.>>--.<<-...>.<--.>--.>++.<++.<++....+.---.>>--.<<++....>.<--.>--.>++.<++.<...+++.-.>>--.<<...>.<--..>-
+-.>++.<++.<++..+.-.......+.-..>>--.<<...>.<--.>--.>++.<++.<++..+.---.>>--.<<++....>.<--.>--.>++.<++.<...+++.-...>>--.
 
 ...
 ```
