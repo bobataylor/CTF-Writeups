@@ -59,7 +59,7 @@ Cracking chall open in Ghidra I was able to locate the main function and do a li
 
 Poking around in load_puzzle and load_key can help us understand the format of the two input files and how they are represented in memory, but I'm going to skip ahead to the fun stuff in encrypt_puzzle. This function took a while to get my head around and I was reguarly switching back and forth between the disassembly and decompiled views to make sure I truly understanding it.
 
-<img src=encrypt_decomp.png>
+<img src=encrypt_decomp.PNG>
 
 At the end of the day the encryption is actually fairly simple, each coordinate pair in the key selects a cell in the QR code and the other number specifies whether to add or subtract that cell with one of the others surrounding it. I've recreated the encryption in the python function below.
 ```python
